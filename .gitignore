@@ -1,0 +1,81 @@
+# ================================
+# Java / Maven
+# ================================
+
+target/
+*.class
+*.jar
+*.war
+*.ear
+
+# Maven Wrapper JAR은 예외
+!.mvn/wrapper/maven-wrapper.jar
+
+
+# ================================
+# VS Code
+# ================================
+
+.vscode/
+
+
+# ================================
+# IntelliJ
+# ================================
+
+.idea/
+*.iml
+*.ipr
+*.iws
+
+
+# ================================
+# Eclipse / STS
+# ================================
+
+.classpath
+.project
+.settings/
+.springBeans
+.sts4-cache/
+
+
+# ================================
+# Environment / Secret
+# ================================
+
+.env
+.env.*
+!.env.example
+
+application-local.yml
+application-local.yaml
+application-secret.yml
+application-secret.yaml
+application-prod.yml
+application-prod.yaml
+
+
+# ================================
+# Logs
+# ================================
+
+*.log
+logs/
+
+
+# ================================
+# OS
+# ================================
+
+.DS_Store
+Thumbs.db
+
+
+# ================================
+# Temp
+# ================================
+
+tmp/
+temp/
+*.tmp
