@@ -1,13 +1,17 @@
-package com.sait.api.domain.auth.dto;
+package com.sait.api.domain.auth.dto.response;
 
-public record LoginResponse(
+import com.sait.api.domain.auth.AuthProvider;
+
+public record AppLoginResponse(
         Long userId,
-        String email,
+        AuthProvider provider,
         String name,
         String role,
+        boolean newMember,
         String accessToken,
         String refreshToken,
         long accessTokenExpiresIn,
         long refreshTokenExpiresIn
 ) {
 }
+

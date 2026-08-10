@@ -15,7 +15,9 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 
 import java.util.HashMap;
 import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -120,6 +122,15 @@ public class GlobalExceptionHandler {
         Map<String, String> errorData = new HashMap<>();
         errorData.put("path", request.getRequestURI());
         errorData.put("exception", e.getClass().getSimpleName());
+
+        /*
+        * 서버 로그에는 전체 Stack Trace 출력
+        */
+        log.error(
+                "서버 내부 오류 발생 - path={}",
+                request.getRequestURI(),
+                e
+        );
 
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)

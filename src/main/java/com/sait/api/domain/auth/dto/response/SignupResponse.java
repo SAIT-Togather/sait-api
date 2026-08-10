@@ -1,4 +1,4 @@
-package com.sait.api.domain.auth.dto;
+package com.sait.api.domain.auth.dto.response;
 
 public record SignupResponse(
         Long userId,

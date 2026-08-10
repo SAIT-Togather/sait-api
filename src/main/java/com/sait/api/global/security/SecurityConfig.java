@@ -73,7 +73,10 @@ public class SecurityConfig {
                                 "/api/app/auth/signup",
                                 "/api/app/auth/reissue",
                                 "/api/app/auth/oauth/**",
-                                "/api/app/auth/health"
+                                "/api/app/auth/health",
+                                "/api/app/auth/email/send",
+                                "/api/app/auth/email/verify",
+                                "/api/app/auth/check-login-id"
                         ).permitAll()
 
                         // 관리자 인증 API

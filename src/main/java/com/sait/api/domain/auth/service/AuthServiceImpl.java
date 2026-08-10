@@ -3,12 +3,12 @@ package com.sait.api.domain.auth.service;
 import com.sait.api.domain.admin.entity.AdminAccount;
 import com.sait.api.domain.admin.repository.AdminAccountRepository;
 import com.sait.api.domain.auth.AuthProvider;
-import com.sait.api.domain.auth.dto.AppLoginResponse;
-import com.sait.api.domain.auth.dto.AppleLoginRequest;
-import com.sait.api.domain.auth.dto.LoginRequest;
-import com.sait.api.domain.auth.dto.LoginResponse;
-import com.sait.api.domain.auth.dto.SignupRequest;
-import com.sait.api.domain.auth.dto.SignupResponse;
+import com.sait.api.domain.auth.dto.request.AppleLoginRequest;
+import com.sait.api.domain.auth.dto.request.LoginRequest;
+import com.sait.api.domain.auth.dto.request.SignupRequest;
+import com.sait.api.domain.auth.dto.response.AppLoginResponse;
+import com.sait.api.domain.auth.dto.response.LoginResponse;
+import com.sait.api.domain.auth.dto.response.SignupResponse;
 import com.sait.api.domain.auth.type.EmailVerificationPurpose;
 import com.sait.api.domain.member.entity.Member;
 import com.sait.api.domain.member.repository.MemberRepository;
@@ -372,4 +372,17 @@ public class AuthServiceImpl implements AuthService {
 
         return memberRepository.save(member);
     }
+
+        @Override
+        public boolean isLoginIdAvailable(String loginId) {
+                /*
+                * 아이디 공백 제거
+                */
+                String normalizedLoginId = loginId.trim();
+
+                /*
+                * 동일한 아이디가 존재하지 않으면 사용 가능
+                */
+                return !memberRepository.existsByLoginId(normalizedLoginId);
+        }
 }

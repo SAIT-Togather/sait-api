@@ -1,12 +1,12 @@
 package com.sait.api.domain.auth.service;
 
-import com.sait.api.domain.auth.dto.AppLoginResponse;
-import com.sait.api.domain.auth.dto.AppleLoginRequest;
-import com.sait.api.domain.auth.dto.KakaoLoginRequest;
-import com.sait.api.domain.auth.dto.LoginRequest;
-import com.sait.api.domain.auth.dto.LoginResponse;
-import com.sait.api.domain.auth.dto.SignupRequest;
-import com.sait.api.domain.auth.dto.SignupResponse;
+import com.sait.api.domain.auth.dto.request.AppleLoginRequest;
+import com.sait.api.domain.auth.dto.request.KakaoLoginRequest;
+import com.sait.api.domain.auth.dto.request.LoginRequest;
+import com.sait.api.domain.auth.dto.request.SignupRequest;
+import com.sait.api.domain.auth.dto.response.AppLoginResponse;
+import com.sait.api.domain.auth.dto.response.LoginResponse;
+import com.sait.api.domain.auth.dto.response.SignupResponse;
 
 import jakarta.validation.Valid;
 
@@ -23,4 +23,6 @@ public interface AuthService {
     AppLoginResponse appleLogin(AppleLoginRequest request);
     // 카카오 로그인
     //AppLoginResponse kakaoLogin(KakaoLoginRequest request);
+    // 아이디 중복 체크
+    boolean isLoginIdAvailable(String loginId);
 }

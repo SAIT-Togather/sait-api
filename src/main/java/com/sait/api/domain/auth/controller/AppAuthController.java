@@ -1,14 +1,15 @@
 package com.sait.api.domain.auth.controller;
 
-import com.sait.api.domain.auth.dto.AppLoginResponse;
-import com.sait.api.domain.auth.dto.AppleLoginRequest;
-import com.sait.api.domain.auth.dto.KakaoLoginRequest;
-import com.sait.api.domain.auth.dto.LoginRequest;
-import com.sait.api.domain.auth.dto.LoginResponse;
-import com.sait.api.domain.auth.dto.SignupRequest;
-import com.sait.api.domain.auth.dto.SignupResponse;
+import com.sait.api.domain.auth.dto.request.AppleLoginRequest;
 import com.sait.api.domain.auth.dto.request.EmailVerificationConfirmRequest;
 import com.sait.api.domain.auth.dto.request.EmailVerificationSendRequest;
+import com.sait.api.domain.auth.dto.request.KakaoLoginRequest;
+import com.sait.api.domain.auth.dto.request.LoginRequest;
+import com.sait.api.domain.auth.dto.request.SignupRequest;
+import com.sait.api.domain.auth.dto.response.AppLoginResponse;
+import com.sait.api.domain.auth.dto.response.LoginIdCheckResponse;
+import com.sait.api.domain.auth.dto.response.LoginResponse;
+import com.sait.api.domain.auth.dto.response.SignupResponse;
 import com.sait.api.domain.auth.service.AuthService;
 import com.sait.api.domain.auth.service.EmailVerificationService;
 import com.sait.api.global.response.ApiResponse;
@@ -26,17 +27,15 @@ public class AppAuthController {
 
     private final AuthService authService;
     private final EmailVerificationService emailVerificationService;
-
+    /*
+     * =========================================================
+     * 회원가입
+     * =========================================================
+     */
     @PostMapping("/signup")
     public ApiResponse<SignupResponse> signup( @Valid @RequestBody SignupRequest request) {
-        return ApiResponse.success("앱 로그인이 완료되었습니다.", authService.signup(request));
+        return ApiResponse.success("앱 회원가입이 완료되었습니다.", authService.signup(request));
     }
-
-    @PostMapping("/login")
-    public ApiResponse<LoginResponse> login( @Valid @RequestBody LoginRequest request) {
-        return ApiResponse.success("앱 로그인이 완료되었습니다.", authService.appLogin(request));
-    }
-
     /*
      * =========================================================
      * 이메일 인증번호 발송
@@ -84,12 +83,34 @@ public class AppAuthController {
         );
     }
 
+    @GetMapping("/check-login-id")
+    public LoginIdCheckResponse checkLoginId(
+            @RequestParam String loginId
+    ) {
+
+        boolean available = authService.isLoginIdAvailable(loginId);
+
+        return new LoginIdCheckResponse(
+                true,
+                "SUCCESS",
+                available
+                        ? "사용 가능한 아이디입니다."
+                        : "이미 사용 중인 아이디입니다.",
+                available
+        );
+    }
+
     @GetMapping("/health")
     public ApiResponse<Map<String, Object>> health() {
         return ApiResponse.success(Map.of(
                 "service", "SAIT APP AUTH API",
                 "status", "OK"
         ));
+    }
+
+    @PostMapping("/login")
+    public ApiResponse<LoginResponse> login( @Valid @RequestBody LoginRequest request) {
+        return ApiResponse.success("앱 로그인이 완료되었습니다.", authService.appLogin(request));
     }
 
     @PostMapping("/apple")

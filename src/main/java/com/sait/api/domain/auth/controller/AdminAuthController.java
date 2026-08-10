@@ -1,7 +1,7 @@
 package com.sait.api.domain.auth.controller;
 
-import com.sait.api.domain.auth.dto.LoginRequest;
-import com.sait.api.domain.auth.dto.LoginResponse;
+import com.sait.api.domain.auth.dto.request.LoginRequest;
+import com.sait.api.domain.auth.dto.response.LoginResponse;
 import com.sait.api.domain.auth.service.AuthService;
 import com.sait.api.global.response.ApiResponse;
 import jakarta.validation.Valid;
